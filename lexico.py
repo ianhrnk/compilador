@@ -41,6 +41,16 @@ tokens = [
     'COMMA',
     'ASSIGNMENT',
     'SEMICOLON',
+    'OR',
+    'AND',
+    'EXCLAMATION',
+    'INTERROGATION',
+    'COLON',
+    'SUMEQUALS',
+    'MINUSEQUALS',
+    'TIMESEQUALS',
+    'DIVIDEEQUALS',
+    'MOD',
 ] + list(reserved.values())
  
 # Expressões regulares para reconhecimento de átomos simples
@@ -48,23 +58,40 @@ t_PLUS    = r'\+'
 t_MINUS   = r'-'
 t_TIMES   = r'\*'
 t_DIVIDE  = r'/'
+t_ASSIGNMENT = '='
+
+t_ignore  = ' \t' # Cadeia que contem carcateres ignorados (espacos e tabulações)
+
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_ignore  = ' \t' # Cadeia que contem carcateres ignorados (espacos e tabulações)
+
 t_IDENTIFIER = r'[a-zA-Z_][a-zA-Z_0-9]*' # Se nn tiver limite de caracteres.
+
 t_EQUAL = '=='
 t_DIFFERENCE = '!='
 t_LESS = '<'
 t_LESS_EQUAL = '<='
 t_GREATER = '>'
 t_GREATER_EQUAL = '>='
+
 t_LBRACE = '{'
 t_RBRACE = '}'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
+
 t_COMMA = ','
-t_ASSIGNMENT = '='
 t_SEMICOLON = ';'
+t_OR = r'\|\|'
+t_AND = r'&&'
+t_EXCLAMATION = r'!'
+t_INTERROGATION = r'\?'
+t_COLON = r':'
+
+t_SUMEQUALS = r'\+='
+t_MINUSEQUALS = r'-='
+t_TIMESEQUALS = r'\*='
+t_DIVIDEEQUALS = r'/'
+t_MOD = r'%'
 
 '''
 # Expressões regulares para reconhecimento de palvras reservadas
