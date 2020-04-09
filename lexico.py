@@ -128,8 +128,13 @@ def t_NAME(t):
     return t
 
 # Regra para ignorar comentários de linha
-def t_COMMEN_MONOLINE(t):
+def t_COMMENT_MONOLINE(t):
     r'//.*'
+    pass
+
+# Regra para ignorar comentários de bloco
+def t_COMMENT_MULTLINE(t):
+    r'(/\*(.|\n)*?\*/)'
     pass
 
 # Define uma regra para controle do numero de linhas
