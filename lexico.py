@@ -96,19 +96,8 @@ t_MINUSEQUALS = r'-='
 t_TIMESEQUALS = r'\*='
 t_DIVIDEEQUALS = r'/'
 t_MOD = r'%'
-
-'''
-# Expressões regulares para reconhecimento de palvras reservadas
-t_INT       =      r'int'
-t_BOOL      =      r'bool'
-t_TRUE      =      r'true'
-t_FALSE     =      r'false'
-t_READ      =      r'read'
-t_WRITE     =      r'write'
-'''
  
 # Uma expressão regular para reconhecimento de números
-# já exige código adicional de tratamento
 def t_NUMBER(t):
     r'\d+'
     try:
