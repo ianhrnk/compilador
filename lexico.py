@@ -10,12 +10,16 @@ import ply.lex as lex
 
 # Lista de palavras reservadas.
 reserved = {
-    'int'   :   'INT',
-    'bool'  :   'BOOL',
-    'true'  :   'TRUE',
-    'false' :   'FALSE',
-    'read'  :   'READ',
-    'write' :   'WRITE'
+    'integer'   :   'INTEGER',
+    'boolean'   :   'BOOLEAN',
+    'true'      :   'TRUE',
+    'false'     :   'FALSE',
+    'read'      :   'READ',
+    'write'     :   'WRITE',
+    'while'     :   'WHILE',
+    'if'        :   'IF',
+    'else'      :   'ELSE',
+    'return'    :   'RETURN'
 }
  
 # Lista de átomos. Essa declaração é necessária.
@@ -123,6 +127,11 @@ def t_NAME(t):
         t.type = tokens[7]
     return t
 
+# Regra para ignorar comentários de linha
+def t_COMMEN_MONOLINE(t):
+    r'//.*'
+    pass
+
 # Define uma regra para controle do numero de linhas
 def t_newline(t):
      r'\n+'
@@ -152,6 +161,6 @@ def main():
         tok = lexer.token()
         if not tok: 
             break      # Final de arquivo
-        print (tok.lineno, ":", tok.type, "\t", tok.value)
+        print ('Line: %d' % tok.lineno, tok.type, tok.value)
         
 main()
