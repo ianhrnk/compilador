@@ -1,0 +1,33 @@
+void Example3()
+    vars z,x: integer;
+    functions
+        void g(t: integer)
+        vars y: integer;
+        {
+            y = t*t;
+            z = z+x+y;
+            write(z);
+        }
+        
+        void h(y: integer)
+        vars x: integer;
+        functions
+            void f(y: integer)
+            vars t: integer;
+            {
+                t = z+x+y;
+                g(t);
+                z = t;
+            }
+        {
+            x = y+1;
+            f(x);
+            g(z+x);
+        }
+{
+    z = 1;
+    x = 3;
+    h(x);
+    g(x);
+    write(x,z);
+}
