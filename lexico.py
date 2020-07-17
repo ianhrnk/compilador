@@ -3,7 +3,8 @@
  #
  # Extrator de átomos da linguagem SL
  # Alunos: Ian Haranaka e Adriano Rodrigues
- # ------------------------------------------------------------
+ # -----------------------------------------------------------
+
 import ply.lex as lex
 
 # Palavras-chave da linguagem
@@ -87,9 +88,12 @@ t_ignore  = ' \t' # Cadeia que contem caracteres ignorados (espacos e tabulacao)
 
 # Uma expressão regular para reconhecimento de números inteiros
 def t_INTEGER_NUMBER(t):
-    r'\d+'
+    r'\d+\.?\d*'
     try:
-        t.value = int(t.value)    
+        if (isinstance(t.value, int)):
+            t.value = int(t.value)
+        else:
+            t.value = float(t.value)
     except ValueError:
         print ("Linha %d: O número %s é muito grande!" % (t.lineno,t.value))
         t.value = 0
@@ -112,6 +116,9 @@ def t_COMMENT_MONOLINE(t):
 # Regra para ignorar comentários de bloco
 def t_COMMENT_MULTLINE(t):
     r'(/\*(.|\n)*?\*/)'
+    for i in t.value:
+        if (i == '\n'):
+            t.lexer.lineno += 1
     pass
 
 # Define uma regra para controle do numero de linhas
@@ -130,7 +137,7 @@ def main():
     lexer = lex.lex() # Constroi o analisador lexico
 
     try:
-        ref_arquivo = open("teste.txt","r")
+        ref_arquivo = open("testes/teste10.txt","r")
         dados = ref_arquivo.read()
         ref_arquivo.close()
     except Exception:
@@ -149,4 +156,4 @@ def main():
             break      # Final de arquivo
         print (tok.lineno, ":", tok.type, "\t", tok.value)
 
-#main()
+main()
