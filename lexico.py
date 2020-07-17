@@ -84,16 +84,13 @@ t_RBRACE = '}'
 t_COMMA = ','
 t_COLON = r':'
 t_SEMICOLON = ';'
-t_ignore  = ' \t' # Cadeia que contem caracteres ignorados (espacos e tabulacao)
+t_ignore  = ' \t'
 
 # Uma expressão regular para reconhecimento de números inteiros
 def t_INTEGER_NUMBER(t):
-    r'\d+\.?\d*'
+    r'\d+'
     try:
-        if (isinstance(t.value, int)):
-            t.value = int(t.value)
-        else:
-            t.value = float(t.value)
+        t.value = int(t.value)
     except ValueError:
         print ("Linha %d: O número %s é muito grande!" % (t.lineno,t.value))
         t.value = 0
@@ -128,7 +125,7 @@ def t_newline(t):
   
 # Regra para manipulação de erros
 def t_error(t):
-    print(t.lineno,": Caractere ilegal! '%s'" % t.value[0])
+    print(t.lineno,": Caractere ilegal '%s'" % t.value[0])
     t.lexer.skip(1)
 
 lex.lex() # Constroi o analisador lexico
@@ -137,7 +134,7 @@ def main():
     lexer = lex.lex() # Constroi o analisador lexico
 
     try:
-        ref_arquivo = open("testes/teste10.txt","r")
+        ref_arquivo = open("testes/teste.txt","r")
         dados = ref_arquivo.read()
         ref_arquivo.close()
     except Exception:
@@ -156,4 +153,4 @@ def main():
             break      # Final de arquivo
         print (tok.lineno, ":", tok.type, "\t", tok.value)
 
-main()
+#main()
